@@ -1748,6 +1748,7 @@ func (n *NetworkServerAPI) GetVersion(ctx context.Context, req *empty.Empty) (*n
 		common.Region_RU864.String():   common.Region_RU864,
 		common.Region_US915.String():   common.Region_US915,
 		common.Region_ISM2400.String(): common.Region_ISM2400,
+		common.Region_KZ865.String():   common.Region_KZ865,
 	}[strings.Replace(band.Band().Name(), "_", "-", -1)]
 
 	if !ok {

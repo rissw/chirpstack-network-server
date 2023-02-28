@@ -193,6 +193,7 @@ get_downlink_data_delay="{{ .NetworkServer.GetDownlinkDataDelay }}"
   # * RU864
   # * US915
   # * ISM2400  (LoRaWAN 2.4GHz: https://lora-developers.semtech.com/library/tech-papers-and-guides/physical-layer-proposal-2.4ghz)
+  # * KZ865
   name="{{ .NetworkServer.Band.Name }}"
 
   # Enforce 400ms dwell time.
