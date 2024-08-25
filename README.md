@@ -1,4 +1,4 @@
-# ChirpStack Network Server
+# Lorawan Network Server
 
 ![Tests](https://github.com/brocaar/chirpstack-network-server/actions/workflows/main.yml/badge.svg?branch=master)
 
