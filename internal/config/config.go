@@ -8,7 +8,7 @@ import (
 	"github.com/brocaar/lorawan/band"
 )
 
-// Version defines the ChirpStack Network Server version.
+// Version defines the Lorawan Network Server version.
 var Version string
 
 // Config defines the configuration structure.

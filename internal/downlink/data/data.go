@@ -441,7 +441,7 @@ func setTXParameters(ctx *dataContext) error {
 	}
 
 	// Calculate the device max. EIRP.
-	// We take the smallest value (chirpstack-network-server.toml vs device-profile) to avoid
+	// We take the smallest value (lorawan-network-server.toml vs device-profile) to avoid
 	// that the device-profile sets a higher EIRP than that is allowed on the
 	// network.
 	deviceMaxEIRPIndex := uplinkMaxEIRPIndex
@@ -1036,7 +1036,7 @@ func setMACCommands(funcs ...func(*dataContext) error) func(*dataContext) error 
 			}
 		}
 
-		// In case mac-commands are disabled in the ChirpStack Network Server configuration,
+		// In case mac-commands are disabled in the Lorawan Network Server configuration,
 		// only allow external mac-commands (e.g. scheduled by an external
 		// controller).
 		if disableMACCommands {

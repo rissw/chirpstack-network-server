@@ -30,7 +30,7 @@ func GetConfig() config.Config {
 	}
 
 	c.Redis.Servers = []string{"localhost:6379"}
-	c.PostgreSQL.DSN = "postgres://localhost/chirpstack_ns_test?sslmode=disable"
+	c.PostgreSQL.DSN = "postgres://localhost/lorawan_ns_test?sslmode=disable"
 
 	c.NetworkServer.NetID = lorawan.NetID{3, 2, 1}
 	c.NetworkServer.DeviceSessionTTL = time.Hour

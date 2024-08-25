@@ -1731,7 +1731,7 @@ func (n *NetworkServerAPI) GetMulticastQueueItemsForMulticastGroup(ctx context.C
 	return &out, nil
 }
 
-// GetVersion returns the ChirpStack Network Server version.
+// GetVersion returns the Lorawan Network Server version.
 func (n *NetworkServerAPI) GetVersion(ctx context.Context, req *empty.Empty) (*ns.GetVersionResponse, error) {
 	region, ok := map[string]common.Region{
 		common.Region_AS923.String():   common.Region_AS923,

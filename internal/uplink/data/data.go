@@ -804,7 +804,7 @@ func handleUplinkMACCommands(ctx context.Context, ds *storage.DeviceSession, dp 
 				}
 			}
 
-			// CID >= 0x80 are proprietary mac-commands and are not handled by ChirpStack Network Server
+			// CID >= 0x80 are proprietary mac-commands and are not handled by Lorawan Network Server
 			if block.CID < 0x80 {
 				responseBlocks, err := maccommand.Handle(ctx, ds, dp, sp, asClient, block, pending, rxPacket)
 				if err != nil {
@@ -818,7 +818,7 @@ func handleUplinkMACCommands(ctx context.Context, ds *storage.DeviceSession, dp 
 		// Report to external controller:
 		//  * in case of proprietary mac-commands
 		//  * in case when the request has been scheduled through the API
-		//  * in case mac-commands are disabled in the ChirpStack Network Server configuration
+		//  * in case mac-commands are disabled in the Lorawan Network Server configuration
 		if disableMACCommands || block.CID >= 0x80 || external {
 			var data [][]byte
 			for _, cmd := range block.MACCommands {

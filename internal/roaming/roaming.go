@@ -130,7 +130,7 @@ func Setup(c config.Config) error {
 }
 
 // IsRoamingDevAddr returns true when the DevAddr does not match the NetID of
-// the ChirpStack Network Server configuration. In case roaming is disabled,
+// the Lorawan Network Server configuration. In case roaming is disabled,
 // this will always return false.
 // Note that enabling roaming -and- using ABP devices can be problematic when
 // the ABP DevAddr does not match the NetID.

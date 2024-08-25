@@ -22,7 +22,7 @@ import (
 	"github.com/brocaar/lorawan"
 )
 
-const uplinkSubscriptionTmpl = "%s-chirpstack"
+const uplinkSubscriptionTmpl = "%s-lorawan"
 
 // Backend implements a Google Cloud Pub/Sub backend.
 type Backend struct {
