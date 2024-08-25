@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 OLD_NAME=loraserver
-NAME=chirpstack-network-server
+NAME=lorawan-network-server
 BIN_DIR=/usr/bin
-SCRIPT_DIR=/usr/lib/chirpstack-network-server/scripts
-LOG_DIR=/var/log/chirpstack-network-server
+SCRIPT_DIR=/usr/lib/lorawan-network-server/scripts
+LOG_DIR=/var/log/lorawan-network-server
 DAEMON_USER=networkserver
 DAEMON_GROUP=networkserver
 
