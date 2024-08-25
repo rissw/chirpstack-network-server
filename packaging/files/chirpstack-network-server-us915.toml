@@ -1,10 +1,7 @@
-# This configuration configures ChirpStack Network Server for the US915 band using a MQTT
+# This configuration configures Lorawan Network Server for the US915 band using a MQTT
 # broker to communicate with the gateways. Many options and defaults have been
 # omitted for simplicity.
 #
-# See https://www.chirpstack.io/network-server/install/config/ for a full
-# configuration example and documentation.
-
 
 # PostgreSQL settings.
 #
@@ -14,7 +11,7 @@
 #
 # Besides using an URL (e.g. 'postgres://user:password@hostname/database?sslmode=disable')
 # it is also possible to use the following format:
-# 'user=chirpstack_ns dbname=chirpstack_ns sslmode=disable'.
+# 'user=lorawan_ns dbname=lorawan_ns sslmode=disable'.
 #
 # The following connection parameters are supported:
 #
@@ -36,7 +33,7 @@
 # * require - Always SSL (skip verification)
 # * verify-ca - Always SSL (verify that the certificate presented by the server was signed by a trusted CA)
 # * verify-full - Always SSL (verify that the certification presented by the server was signed by a trusted CA and the server host name matches the one in the certificate)
-dsn="postgres://localhost/chirpstack_ns_ns?sslmode=disable"
+dsn="postgres://localhost/lorawan_ns_ns?sslmode=disable"
 
 
 # Redis settings
@@ -89,8 +86,8 @@ net_id="000000"
 
   # Network-server API
   #
-  # This is the network-server API that is used by ChirpStack Application Server or other
-  # custom components interacting with ChirpStack Network Server.
+  # This is the network-server API that is used by Lorawan Application Server or other
+  # custom components interacting with Lorawan Network Server.
   [network_server.api]
   # ip:port to bind the api server
   bind="0.0.0.0:8000"
@@ -111,11 +108,8 @@ net_id="000000"
     [network_server.gateway.backend.mqtt]
     # MQTT topic templates for the different MQTT topics.
     #
-    # The meaning of these topics are documented at:
-    # https://www.chirpstack.io/gateway-bridge/
-    #
     # The default values match the default expected configuration of the
-    # ChirpStack Gateway Bridge MQTT backend. Therefore only change these values when
+    # Lorawan Gateway Bridge MQTT backend. Therefore only change these values when
     # absolutely needed.
 
     # Event topic template.
@@ -158,5 +152,5 @@ timezone="Local"
   [join_server.default]
   # hostname:port of the default join-server
   #
-  # This API is provided by ChirpStack Application Server.
+  # This API is provided by Lorawan Application Server.
   server="http://localhost:8003"
