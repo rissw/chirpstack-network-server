@@ -16,7 +16,7 @@ import (
 var printDSCmd = &cobra.Command{
 	Use:     "print-ds",
 	Short:   "Print the device-session as JSON (for debugging)",
-	Example: `chirpstack-network-server print-ds 0102030405060708`,
+	Example: `lorawan-network-server print-ds 0102030405060708`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) != 1 {
 			log.Fatalf("hex encoded DevEUI must be given as an argument")
