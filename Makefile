@@ -1,11 +1,11 @@
 .PHONY: build clean test package serve update-vendor api
 VERSION := $(shell git describe --always |sed -e "s/^v//")
-API_VERSION := $(shell go list -m -f '{{ .Version }}' github.com/brocaar/chirpstack-api/go/v3 | awk '{n=split($$0, a, "-"); print a[n]}')
+API_VERSION := $(shell go list -m -f '{{ .Version }}' github.com/brocaar/lorawan-api/go/v3 | awk '{n=split($$0, a, "-"); print a[n]}')
 
 build:
 	@echo "Compiling source"
 	@mkdir -p build
-	go build $(GO_EXTRA_BUILD_ARGS) -ldflags "-s -w -X main.version=$(VERSION)" -o build/chirpstack-network-server cmd/chirpstack-network-server/main.go
+	go build $(GO_EXTRA_BUILD_ARGS) -ldflags "-s -w -X main.version=$(VERSION)" -o build/lorawan-network-server cmd/lorawan-network-server/main.go
 
 clean:
 	@echo "Cleaning up workspace"
@@ -51,8 +51,8 @@ dev-requirements:
 # shortcuts for development
 
 serve: build
-	@echo "Starting ChirpStack Network Server"
-	./build/chirpstack-network-server
+	@echo "Starting Lorawan Network Server"
+	./build/lorawan-network-server
 
 run-compose-test:
-	docker-compose run --rm chirpstack-network-server make test
+	docker-compose run --rm lorawan-network-server make test
