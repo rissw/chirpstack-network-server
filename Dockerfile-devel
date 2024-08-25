@@ -1,6 +1,6 @@
 FROM golang:1.19.3-alpine
 
-ENV PROJECT_PATH=/chirpstack-network-server
+ENV PROJECT_PATH=/lorawan-network-server
 ENV PATH=$PATH:$PROJECT_PATH/build
 ENV CGO_ENABLED=0
 ENV GO_EXTRA_BUILD_ARGS="-a -installsuffix cgo"
