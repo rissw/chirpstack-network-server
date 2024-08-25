@@ -36,7 +36,7 @@ grpc_default_resolver_scheme="{{ .General.GRPCDefaultResolverScheme }}"
 #
 # Besides using an URL (e.g. 'postgres://user:password@hostname/database?sslmode=disable')
 # it is also possible to use the following format:
-# 'user=chirpstack_ns dbname=chirpstack_ns sslmode=disable'.
+# 'user=lorawan_ns dbname=lorawan_ns sslmode=disable'.
 #
 # The following connection parameters are supported:
 #
@@ -63,9 +63,8 @@ dsn="{{ .PostgreSQL.DSN }}"
 # Automatically apply database migrations.
 #
 # It is possible to apply the database-migrations by hand
-# (see https://github.com/brocaar/chirpstack-network-server/tree/master/internal/storage/migrations)
-# or let ChirpStack Application Server migrate to the latest state automatically, by using
-# this setting. Make sure that you always make a backup when upgrading ChirpStack
+# or let Lorawan Application Server migrate to the latest state automatically, by using
+# this setting. Make sure that you always make a backup when upgrading Lorawan
 # Application Server and / or applying migrations.
 automigrate={{ .PostgreSQL.Automigrate }}
 
@@ -143,10 +142,10 @@ net_id="{{ .NetworkServer.NetID }}"
 
 # Time to wait for uplink de-duplication.
 #
-# This is the time that ChirpStack Network Server will wait for other gateways to receive
+# This is the time that Lorawan Network Server will wait for other gateways to receive
 # the same uplink frame. Valid units are 'ms' or 's'.
 # Please note that this value has influence on the uplink / downlink
-# roundtrip time. Setting this value too high means ChirpStack Network Server will be
+# roundtrip time. Setting this value too high means Lorawan Network Server will be
 # unable to respond to the device within its receive-window.
 deduplication_delay="{{ .NetworkServer.DeduplicationDelay }}"
 
@@ -159,13 +158,13 @@ device_session_ttl="{{ .NetworkServer.DeviceSessionTTL }}"
 
 # Get downlink data delay.
 #
-# This is the time that ChirpStack Network Server waits between forwarding data to the
+# This is the time that Lorawan Network Server waits between forwarding data to the
 # application-server and reading data from the queue. A higher value
 # means that the application-server has more time to schedule a downlink
 # queue item which can be processed within the same uplink / downlink
 # transaction.
 # Please note that this value has influence on the uplink / downlink
-# roundtrip time. Setting this value too high means ChirpStack Network Server will be
+# roundtrip time. Setting this value too high means Lorawan Network Server will be
 # unable to respond to the device within its receive-window.
 get_downlink_data_delay="{{ .NetworkServer.GetDownlinkDataDelay }}"
 
@@ -202,7 +201,7 @@ get_downlink_data_delay="{{ .NetworkServer.GetDownlinkDataDelay }}"
   # limit the time-on-air to 400ms. Please refer to the LoRaWAN Regional
   # Parameters specification for more information.
   #
-  # When configured and required in the configured region, ChirpStack Network Server will
+  # When configured and required in the configured region, Lorawan Network Server will
   # use the TxParamSetup mac-command to communicate this to the devices.
   uplink_dwell_time_400ms={{ .NetworkServer.Band.UplinkDwellTime400ms }}
   downlink_dwell_time_400ms={{ .NetworkServer.Band.DownlinkDwellTime400ms }}
@@ -214,7 +213,7 @@ get_downlink_data_delay="{{ .NetworkServer.GetDownlinkDataDelay }}"
   # for more information. Set this to -1 to use the default value for this
   # region.
   #
-  # When required in the configured region, ChirpStack Network Server will use the
+  # When required in the configured region, Lorawan Network Server will use the
   # TxParamSetup mac-command to communicate this to the devices.
   # For regions where the TxParamSetup mac-command is not implemented, this
   # setting is ignored.
@@ -249,7 +248,7 @@ get_downlink_data_delay="{{ .NetworkServer.GetDownlinkDataDelay }}"
 
   # Class A RX1 delay
   #
-  # 0=1sec, 1=1sec, ... 15=15sec. A higher value means ChirpStack Network Server has more
+  # 0=1sec, 1=1sec, ... 15=15sec. A higher value means Lorawan Network Server has more
   # time to respond to the device as the delay between the uplink and the
   # first receive-window will be increased.
   rx1_delay={{ .NetworkServer.NetworkSettings.RX1Delay }}
@@ -317,7 +316,7 @@ get_downlink_data_delay="{{ .NetworkServer.GetDownlinkDataDelay }}"
 
   # Disable mac-commands
   #
-  # When set to true, ChirpStack Network Server will not handle and / or schedule any
+  # When set to true, Lorawan Network Server will not handle and / or schedule any
   # mac-commands. However, it is still possible for an external controller
   # to handle and / or schedule mac-commands. This is intended for testing
   # only.
@@ -331,7 +330,7 @@ get_downlink_data_delay="{{ .NetworkServer.GetDownlinkDataDelay }}"
   # Max mac-command error count.
   #
   # When a mac-command is nACKed for more than the configured value, then the
-  # ChirpStack Network Server will stop sending this mac-command to the device.
+  # Lorawan Network Server will stop sending this mac-command to the device.
   # This setting prevents that the Network Server will keep sending mac-commands
   # on every downlink in case of a malfunctioning device.
   max_mac_command_error_count={{ .NetworkServer.NetworkSettings.MaxMACCommandErrorCount }}
@@ -417,7 +416,7 @@ get_downlink_data_delay="{{ .NetworkServer.GetDownlinkDataDelay }}"
 
   # Rejoin-request settings
   #
-  # When enabled, ChirpStack Network Server will request the device to send a rejoin-request
+  # When enabled, Lorawan Network Server will request the device to send a rejoin-request
   # every time when one of the 2 conditions below is met (frame count or time).
   [network_server.network_settings.rejoin_request]
   # Request device to periodically send rejoin-requests
@@ -474,8 +473,8 @@ get_downlink_data_delay="{{ .NetworkServer.GetDownlinkDataDelay }}"
 
   # Network-server API
   #
-  # This is the network-server API that is used by ChirpStack Application Server or other
-  # custom components interacting with ChirpStack Network Server.
+  # This is the network-server API that is used by Lorawan Application Server or other
+  # custom components interacting with Lorawan Network Server.
   [network_server.api]
   # ip:port to bind the api server
   bind="{{ .NetworkServer.API.Bind }}"
@@ -494,7 +493,7 @@ get_downlink_data_delay="{{ .NetworkServer.GetDownlinkDataDelay }}"
   [network_server.gateway]
   # CA certificate and key file (optional).
   #
-  # When setting the CA certificate and key file options, ChirpStack Network Server
+  # When setting the CA certificate and key file options, Lorawan Network Server
   # will generate client certificates which can be used by the gateway for
   # authentication and authorization. The Common Name of the certificate will
   # be set to the Gateway ID.
@@ -542,9 +541,9 @@ get_downlink_data_delay="{{ .NetworkServer.GetDownlinkDataDelay }}"
 
     # Multi-downlink feature flag.
     #
-    # This controls the new multi downlink feature, in which the Chirpstack
+    # This controls the new multi downlink feature, in which the Lorawan 
     # Network Server will send the downlink parameters for all possible
-    # receive windows to the ChirpStack Gateway Bridge, avoiding an additional
+    # receive windows to the Lorawan Gateway Bridge, avoiding an additional
     # roundtrip in case of a retry (e.g second receive window).
     #
     # Valid options are:
@@ -553,11 +552,11 @@ get_downlink_data_delay="{{ .NetworkServer.GetDownlinkDataDelay }}"
     #  * legacy
     #
     # hybrid: Will send a downlink command in both the new (multi) format
-    # as the old format to the ChirpStack Gateway Bridge. Use this when
-    # not all ChirpStack Gateway Bridge instances are v3.9+.
+    # as the old format to the Lorawan Gateway Bridge. Use this when
+    # not all Lorawan Gateway Bridge instances are v3.9+.
     #
     # multi_only: Will send a downlink command only in the new (multi) format.
-    # This will not work with ChirpStack Gateway Bridge versions less than v3.9.
+    # This will not work with Lorawan Gateway Bridge versions less than v3.9.
     #
     # legacy: Will send a downlink command only in the old format.
     multi_downlink_feature="{{ .NetworkServer.Gateway.Backend.MultiDownlinkFeature }}"
@@ -569,11 +568,8 @@ get_downlink_data_delay="{{ .NetworkServer.GetDownlinkDataDelay }}"
     [network_server.gateway.backend.mqtt]
     # MQTT topic templates for the different MQTT topics.
     #
-    # The meaning of these topics are documented at:
-    # https://www.chirpstack.io/gateway-bridge/
-    #
     # The default values match the default expected configuration of the
-    # ChirpStack Gateway Bridge MQTT backend. Therefore only change these values when
+    # Lorawan Gateway Bridge MQTT backend. Therefore only change these values when
     # absolutely needed.
 
     # Event topic template.
@@ -639,7 +635,7 @@ get_downlink_data_delay="{{ .NetworkServer.GetDownlinkDataDelay }}"
 
     # AMQP / RabbitMQ.
     #
-    # Use this backend when the ChirpStack Gateway Bridge is configured to connect
+    # Use this backend when the Lorawan Gateway Bridge is configured to connect
     # to RabbitMQ using the MQTT plugin. See for more details about this plugin:
     # https://www.rabbitmq.com/mqtt.html
     [network_server.gateway.backend.amqp]
@@ -669,7 +665,7 @@ get_downlink_data_delay="{{ .NetworkServer.GetDownlinkDataDelay }}"
 
     # Google Cloud Pub/Sub backend.
     #
-    # Use this backend when the ChirpStack Gateway Bridge is configured to connect
+    # Use this backend when the Lorawan Gateway Bridge is configured to connect
     # to the Google Cloud IoT Core MQTT broker (which integrates with Pub/Sub).
     [network_server.gateway.backend.gcp_pub_sub]
     # Path to the IAM service-account credentials file.
@@ -689,13 +685,13 @@ get_downlink_data_delay="{{ .NetworkServer.GetDownlinkDataDelay }}"
 
     # Uplink retention duration.
     #
-    # The retention duration that ChirpStack Network Server will set on the uplink subscription.
+    # The retention duration that Lorawan Network Server will set on the uplink subscription.
     uplink_retention_duration="{{ .NetworkServer.Gateway.Backend.GCPPubSub.UplinkRetentionDuration }}"
 
 
     # Azure IoT Hub backend.
     #
-    # Use this backend when the ChirpStack Gateway Bridge is configured to connect
+    # Use this backend when the Lorawan Gateway Bridge is configured to connect
     # to the Azure IoT Hub MQTT broker.
     [network_server.gateway.backend.azure_iot_hub]
 
@@ -707,7 +703,7 @@ get_downlink_data_delay="{{ .NetworkServer.GetDownlinkDataDelay }}"
 
     # Commands connection string.
     #
-    # This connection string must point to the IoT Hub and is used by ChirpStack Network Server
+    # This connection string must point to the IoT Hub and is used by Lorawan Network Server
     # for sending commands to the gateways.
     commands_connection_string="{{ .NetworkServer.Gateway.Backend.AzureIoTHub.CommandsConnectionString }}"
 
@@ -746,7 +742,7 @@ get_downlink_data_delay="{{ .NetworkServer.GetDownlinkDataDelay }}"
 
   # Device frame-log max history.
   #
-  # When set to a value > 0, ChirpStack Network Server will log all uplink and
+  # When set to a value > 0, Lorawan Network Server will log all uplink and
   # downlink frames associated to a device as a Redis stream for the
   # consumption by external applications (e.g. for monitoring purposes) Note
   # that only uplinks passing the MIC and frame-counter tests will be published.
@@ -760,13 +756,13 @@ get_downlink_data_delay="{{ .NetworkServer.GetDownlinkDataDelay }}"
   # Per device frame-log max history.
   #
   # Equal to the device_frame_log_max_history, but it has the device DevEUI
-  # in the Redis key. This feature is used by the ChirpStack Application Server
+  # in the Redis key. This feature is used by the Lorawan Application Server
   # web-interface.
   per_device_frame_log_max_history={{ .Monitoring.PerDeviceFrameLogMaxHistory }}
 
   # Gateway frame-log max history.
   #
-  # When set to a value > 0, ChirpStack Network Server will log all uplink and
+  # When set to a value > 0, Lorawan Network Server will log all uplink and
   # downlink frames received by the gateways as a Redis stream  for the
   # consumption by external applications (e.g. for monitoring purposes). Note
   # that all data reported by the gateways will be published.
@@ -780,7 +776,7 @@ get_downlink_data_delay="{{ .NetworkServer.GetDownlinkDataDelay }}"
   # Per gateway frame-log max history.
   #
   # Equal to the gateway_frame_log_max_history, but it has the GatewayID
-  # in the Redis key. This feature is used by the ChirpStack Application Server
+  # in the Redis key. This feature is used by the Lorawan Application Server
   # web-interface.
   per_gateway_frame_log_max_history={{ .Monitoring.PerGatewayFrameLogMaxHistory }}
 
@@ -790,8 +786,8 @@ get_downlink_data_delay="{{ .NetworkServer.GetDownlinkDataDelay }}"
 # Resolve JoinEUI (experimental).
 # Default join-server settings.
 #
-# When set to true, ChirpStack Network Server will use the JoinEUI to resolve the join-server
-# for the given JoinEUI. ChirpStack Network Server will fallback on the default join-server
+# When set to true, Lorawan Network Server will use the JoinEUI to resolve the join-server
+# for the given JoinEUI. Lorawan Network Server will fallback on the default join-server
 # when resolving the JoinEUI fails.
 resolve_join_eui={{ .JoinServer.ResolveJoinEUI }}
 
@@ -855,7 +851,7 @@ resolve_domain_suffix="{{ .JoinServer.ResolveDomainSuffix }}"
   [join_server.default]
   # Default server endpoint.
   #
-  # This API is provided by ChirpStack Application Server.
+  # This API is provided by Lorawan Application Server.
   server="{{ .JoinServer.Default.Server }}"
 
   # # Use the async API scheme.
@@ -1038,7 +1034,7 @@ resolve_netid_domain_suffix="{{ .Roaming.ResolveNetIDDomainSuffix }}"
 
 var configCmd = &cobra.Command{
 	Use:   "configfile",
-	Short: "Print the ChirpStack Network Server configuration file",
+	Short: "Print the Lorawan Network Server configuration file",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		t := template.Must(template.New("config").Parse(configTemplate))
 		err := t.Execute(os.Stdout, &config.C)

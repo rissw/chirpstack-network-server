@@ -91,7 +91,7 @@ func run(cmd *cobra.Command, args []string) error {
 	signal.Notify(sigChan, os.Interrupt, syscall.SIGTERM)
 	log.WithField("signal", <-sigChan).Info("signal received")
 	go func() {
-		log.Warning("stopping chirpstack-network-server")
+		log.Warning("stopping lorawan-network-server")
 		if err := server.Stop(); err != nil {
 			log.Fatal(err)
 		}
@@ -166,8 +166,8 @@ func printStartMessage() error {
 		"version": version,
 		"net_id":  config.C.NetworkServer.NetID.String(),
 		"band":    config.C.NetworkServer.Band.Name,
-		"docs":    "https://www.chirpstack.io/",
-	}).Info("starting ChirpStack Network Server")
+		"docs":    "https://www.lorawan.io/",
+	}).Info("starting Lorawan Network Server")
 	return nil
 }
 

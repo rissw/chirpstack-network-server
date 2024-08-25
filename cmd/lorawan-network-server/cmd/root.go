@@ -3,7 +3,6 @@ package cmd
 import (
 	"bytes"
 	"encoding/json"
-	"io/ioutil"
 	"os"
 	"reflect"
 	"strings"
@@ -25,12 +24,10 @@ var (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "chirpstack-network-server",
-	Short: "ChirpStack Network Server",
-	Long: `ChirpStack Network Server is an open-source LoRaWAN Network Server, part of the ChirpStack Network Server stack
-	> documentation & support: https://www.chirpstack.io/network-server/
-	> source & copyright information: https://github.com/brocaar/chirpstack-network-server/v3/`,
-	RunE: run,
+	Use:   "lorawan-network-server",
+	Short: "Lorawan Network Server",
+	Long:  `Lorawan Network Server is an open-source LoRaWAN Network Server`,
+	RunE:  run,
 }
 
 func init() {
@@ -46,7 +43,7 @@ func init() {
 	viper.SetDefault("general.grpc_default_resolver_scheme", "passthrough")
 	viper.SetDefault("redis.servers", []string{"localhost:6379"})
 
-	viper.SetDefault("postgresql.dsn", "postgres://localhost/chirpstack_ns?sslmode=disable")
+	viper.SetDefault("postgresql.dsn", "postgres://localhost/lorawan_ns?sslmode=disable")
 	viper.SetDefault("postgresql.automigrate", true)
 	viper.SetDefault("postgresql.max_idle_connections", 2)
 
@@ -127,7 +124,7 @@ func initConfig() {
 	config.Version = version
 
 	if cfgFile != "" {
-		b, err := ioutil.ReadFile(cfgFile)
+		b, err := os.ReadFile(cfgFile)
 		if err != nil {
 			log.WithError(err).WithField("config", cfgFile).Fatal("error loading config file")
 		}
@@ -136,14 +133,14 @@ func initConfig() {
 			log.WithError(err).WithField("config", cfgFile).Fatal("error loading config file")
 		}
 	} else {
-		viper.SetConfigName("chirpstack-network-server")
+		viper.SetConfigName("lorawan-network-server")
 		viper.AddConfigPath(".")
-		viper.AddConfigPath("$HOME/.config/chirpstack-network-server")
-		viper.AddConfigPath("/etc/chirpstack-network-server")
+		viper.AddConfigPath("$HOME/.config/lorawan-network-server")
+		viper.AddConfigPath("/etc/lorawan-network-server")
 		if err := viper.ReadInConfig(); err != nil {
 			switch err.(type) {
 			case viper.ConfigFileNotFoundError:
-				log.Warning("No configuration file found, using defaults. See: https://www.chirpstack.io/network-server/install/config/")
+				log.Warning("No configuration file found, using defaults. See: https://www.lorawan.io/network-server/install/config/")
 			default:
 				log.WithError(err).Fatal("read configuration file error")
 			}
